@@ -46,11 +46,27 @@ it in this order (the path differs between a personal skill and a plugin install
 Verify the resolved directory exists and contains `CLAUDE.md` and `MEMORY-SYSTEM.md`
 before using it.
 
-### Step 2 — choose scope and gather inputs
+### Step 2 — choose scope, memory mode, and gather inputs
+
+First, detect the git context to inform the recommendation: run `git -C <target>
+remote -v`. If there is a remote, note its host/URL. You generally cannot tell
+public vs private reliably without an API call, so ASK rather than assume.
 
 Use AskUserQuestion to ask:
 - Scope: full kit (memory + orchestrator) | only living memory | only orchestrator scaffolding.
 - Target: confirm the install directory (default: current repo root).
+- **Memory persistence mode** (this is critical — the memory files contain
+  project decisions, pain-points, and notes that often must NOT be public):
+  - `Local-only (gitignored)` — RECOMMENDED DEFAULT. Memory and state files stay
+    on this machine and are excluded from git. Safe for ANY repo, including
+    public ones. Memory survives across sessions but does not travel between
+    machines via git.
+  - `Versioned (committed)` — Memory travels with the repo and syncs across
+    machines. Choose this ONLY for PRIVATE repos. NEVER for public repos.
+
+  If the detected remote looks public (e.g. a github.com URL on a repo the user
+  describes as open source) or the user is unsure, default to `Local-only` and
+  say why.
 
 Then collect the placeholder values to substitute (ask in one batched message,
 skip any the user does not have yet — they can fill later):
@@ -80,13 +96,64 @@ idioma/forma block, and `<YYYY-MM-DD>` headers (use today's date). Leave example
 blocks (HTML comments) as guidance or strip them per the user's preference. Tell
 the user which placeholders you could not fill so they finish them.
 
-### Step 5 — confirm and optionally commit
+### Step 5 — configure .gitignore (based on memory mode)
 
-Show the tree you created. If the target is a git repo and the user wants it,
-stage and commit the scaffolding. From here the system travels with the repo.
+This step prevents accidentally publishing project memory. Do it BEFORE any commit.
+
+If the user chose **Local-only (gitignored)** in Step 2, append the following
+block to the target's `.gitignore` (create the file if it does not exist; do not
+duplicate the block if it is already present). These paths are project DATA that
+should stay local; everything else (the method: `CLAUDE.md`, `MEMORY-SYSTEM.md`,
+`orchestrator/prompts/_templates/`, README placeholders) stays versionable.
+
+```
+# orchestrator-kit: memoria viva y estado del orquestador (local, no versionado)
+.claude/memory/
+.claude/napkin.md
+orchestrator/state/
+orchestrator/inbox/
+orchestrator/handoff-archive/
+orchestrator/prompts/active/
+orchestrator/prompts/completed/
+```
+
+Then check whether any of these paths were ALREADY staged or committed (a prior
+run, or the user staged them). Run `git -C <target> ls-files` filtered to those
+paths. If any are tracked, untrack them without deleting the working copy:
+
+```
+git -C <target> rm -r --cached .claude/memory .claude/napkin.md orchestrator/state orchestrator/inbox orchestrator/handoff-archive orchestrator/prompts/active orchestrator/prompts/completed
+```
+
+(Only run it for the paths that actually exist/are tracked, to avoid errors.)
+
+If the repo is public AND those paths were already PUSHED in a prior commit,
+warn the user explicitly: the data is already in the remote history; `.gitignore`
+will not remove it retroactively. They must scrub history or treat it as exposed.
+
+If the user chose **Versioned (committed)**, skip this step but reconfirm once
+that the repo is private before proceeding to commit.
+
+### Step 6 — confirm and optionally commit
+
+Show the tree you created and the memory mode chosen. If the target is a git repo
+and the user wants it, stage and commit the scaffolding.
+
+- In **Local-only** mode, the commit will include the method files and the
+  `.gitignore` you wrote, but NOT the memory/state data (git skips ignored paths).
+  Verify with `git -C <target> status` that no `.claude/memory/` or
+  `orchestrator/state/` files appear staged before committing.
+- In **Versioned** mode (private repo only), the commit includes everything.
+
+Never bundle the scaffolding commit with unrelated pre-existing changes in the
+working tree — commit the kit in isolation and leave the user's other work alone.
 
 ## Key rules to convey to the user (so the system actually works)
 
+- NEVER let project memory/state reach a public repo. The end-of-session ritual
+  in `CLAUDE.md` ends in `commit + push`; in a public repo that publishes
+  decisions, pain-points and notes. Default to Local-only mode (Step 2/5) unless
+  the user confirms a private repo. Never write real secrets into memory either.
 - The rituals in `CLAUDE.md` are what make the model USE the files. Without the
   start-of-session read and end-of-session write, the files exist but go stale.
 - One fact per memory file. Update existing files, do not duplicate. Delete false

@@ -48,6 +48,12 @@ ese (no dupliques); borra memorias falsas; no guardes lo que el repo ya registra
 actual; convierte fechas relativas a absolutas; al recordar, verifica que el
 archivo/funcion/flag mencionado aun exista antes de recomendarlo.
 
+Privacidad: si este repo es publico, la memoria y los state files NO deben
+versionarse (contienen decisiones, fricciones y notas internas). En ese caso
+estan excluidos via `.gitignore` y viven solo en esta maquina; el `commit + push`
+del cierre los salta sin error. Solo versiona la memoria en repos privados.
+NUNCA escribas secretos reales en memoria.
+
 Detalle completo del subsistema en `MEMORY-SYSTEM.md`.
 
 ## Al arrancar cada sesion (obligatorio, en orden, antes de cualquier otra cosa)

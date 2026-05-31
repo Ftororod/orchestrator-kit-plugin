@@ -2,6 +2,22 @@
 
 Formato basado en Keep a Changelog. El plugin sigue semver.
 
+## [1.1.0] - 2026-05-31
+
+### Added
+- Paso de **modo de persistencia de memoria** en el skill: pregunta Local-only
+  (gitignored, default recomendado, seguro en repos publicos) vs Versioned
+  (solo repos privados).
+- Generacion automatica de `.gitignore` con las exclusiones de memoria/state
+  cuando se elige Local-only; detecta y des-trackea archivos ya staged/committed.
+- Aviso explicito si el repo es publico y la memoria ya fue pusheada (historia expuesta).
+- Nota de privacidad en el `template/CLAUDE.md` para que el orquestador instalado
+  entienda su propio modo de memoria.
+
+### Changed
+- Step 6 (commit) verifica que no haya memoria staged en Local-only y prohibe
+  mezclar el commit del scaffolding con cambios pre-existentes del working tree.
+
 ## [1.0.0] - 2026-05-31
 
 ### Added

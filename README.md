@@ -33,6 +33,24 @@ Tambien se activa automaticamente con frases como "monta la memoria viva del
 proyecto" o "modo orquestador". El skill te pregunta el alcance y hace el
 scaffolding en el proyecto actual.
 
+## Privacidad: repo publico vs privado
+
+La memoria y los state files contienen decisiones, fricciones y notas internas
+del proyecto. El ritual de cierre termina en `commit + push`, asi que **en un
+repo publico eso se publicaria**. Por eso, al instalar, el skill pregunta el
+**modo de persistencia de memoria**:
+
+- **Local-only (gitignored)** — default recomendado. La memoria vive solo en tu
+  maquina, excluida de git via `.gitignore` (el skill lo genera automaticamente).
+  Seguro en cualquier repo, incluido publico. Sobrevive entre sesiones pero no
+  viaja entre maquinas por git.
+- **Versioned (committed)** — la memoria viaja con el repo y sincroniza entre
+  maquinas. Solo para repos **privados**. Nunca para publicos.
+
+En modo Local-only el `commit + push` del cierre simplemente salta los archivos
+ignorados, sin error: se versiona el metodo (`CLAUDE.md`, `MEMORY-SYSTEM.md`,
+plantillas), no los datos. Nunca escribas secretos reales en memoria.
+
 ## El problema que resuelve
 
 Claude no recuerda nada entre sesiones: su unica memoria es el contexto de la
