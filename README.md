@@ -31,7 +31,7 @@ de una o ambas capas:
 Una vez este repo este en GitHub (ver "Publicar" abajo), en cualquier proyecto:
 
 ```
-/plugin marketplace add <TU_USUARIO>/orchestrator-kit-plugin
+/plugin marketplace add Ftororod/orchestrator-kit-plugin
 /plugin install orchestrator-kit@ftoro-tools
 ```
 
@@ -51,13 +51,14 @@ GitHub manualmente o con tu CLI y luego:
 
 ```bash
 cd /home/labvm/orchestrator-kit-plugin
-git remote add origin git@github.com:<TU_USUARIO>/orchestrator-kit-plugin.git
+git remote add origin git@github.com:Ftororod/orchestrator-kit-plugin.git
 git branch -M main
 git push -u origin main
 ```
 
-Antes de publicar, reemplaza `<TU_USUARIO>` en `plugins/orchestrator-kit/.claude-plugin/plugin.json`
-(campos `homepage` y `repository`).
+El repo en GitHub debe llamarse `orchestrator-kit-plugin` bajo la cuenta `Ftororod`
+(crealo vacio, sin README, antes del push). Si usas otra cuenta, ajusta el remote
+y los campos `homepage`/`repository` en `plugins/orchestrator-kit/.claude-plugin/plugin.json`.
 
 ## Actualizar el plugin
 

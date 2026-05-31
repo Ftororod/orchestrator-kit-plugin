@@ -31,11 +31,20 @@ Do NOT ask the user to paste any files. Everything needed is in this skill's
 
 ### Step 1 — find the skill's template directory
 
-The template lives next to this SKILL.md, at `<this-skill-dir>/template/`. Locate
-it robustly (the home path varies per machine) by searching under the Claude
-config dirs for a SKILL.md whose path contains `orchestrator-kit`, then take its
-directory and append `/template`. If nothing is found, search the whole
-filesystem for a directory path ending in `orchestrator-kit/template`.
+The template lives next to this SKILL.md, at `<this-skill-dir>/template/`. Resolve
+it in this order (the path differs between a personal skill and a plugin install):
+
+1. If the env var `CLAUDE_PLUGIN_ROOT` is set (this skill is running as part of an
+   installed plugin), the template is at
+   `$CLAUDE_PLUGIN_ROOT/skills/orchestrator-kit/template`.
+2. Otherwise search under the Claude config dirs (`$HOME/.claude`,
+   `$HOME/.config/claude`) for a SKILL.md whose path contains `orchestrator-kit`,
+   take its directory and append `/template`.
+3. Last resort, search the filesystem for a directory path ending in
+   `orchestrator-kit/template`.
+
+Verify the resolved directory exists and contains `CLAUDE.md` and `MEMORY-SYSTEM.md`
+before using it.
 
 ### Step 2 — choose scope and gather inputs
 

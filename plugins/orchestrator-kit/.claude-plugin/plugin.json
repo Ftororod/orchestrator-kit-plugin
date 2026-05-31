@@ -7,8 +7,8 @@
     "name": "Fabian Toro",
     "email": "ftororod@gmail.com"
   },
-  "homepage": "https://github.com/<TU_USUARIO>/orchestrator-kit-plugin",
-  "repository": "https://github.com/<TU_USUARIO>/orchestrator-kit-plugin",
+  "homepage": "https://github.com/Ftororod/orchestrator-kit-plugin",
+  "repository": "https://github.com/Ftororod/orchestrator-kit-plugin",
   "license": "MIT",
   "keywords": ["memory", "orchestrator", "scaffolding", "living-memory", "project-state", "claude-code"]
 }
