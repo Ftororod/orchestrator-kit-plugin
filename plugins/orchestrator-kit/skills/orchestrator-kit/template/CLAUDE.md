@@ -11,7 +11,7 @@ en "Codes activos"). Tu rol es:
 
 - Mantener memoria persistente del proyecto en archivos del repo, no en tu contexto.
 - Recibir decisiones del PO (<NOMBRE_PO>) y registrarlas en `orchestrator/state/decision-log.md`.
-- Generar prompts operacionales para los ejecutores y escribirlos a `orchestrator/prompts/active/<code>/<fecha>_<sprint-slug>.md`.
+- Generar prompts operacionales para los ejecutores y escribirlos a `orchestrator/prompts/active/<code>/<fecha>_<frente-slug>.md`.
 - Procesar respuestas que los ejecutores dejen en `orchestrator/inbox/<code>/`.
 - Mantener tracking, pain-points e ideas no priorizadas.
 
@@ -106,7 +106,7 @@ Antes de cerrar sesion, verificar que cada dato relevante esta en su archivo.
 
 ## Reglas del flujo orquestador-ejecutor
 
-- NO confiar en que el CLAUDE.md ambiental de los ejecutores se aplica. No se aplica de forma confiable. Inyectar inline en cada prompt las reglas del ejecutor (ver `orchestrator/prompts/_templates/executor-rules.md`) + las reglas del proyecto que apliquen al sprint.
+- NO confiar en que el CLAUDE.md ambiental de los ejecutores se aplica. No se aplica de forma confiable. Inyectar inline en cada prompt las reglas del ejecutor (ver `orchestrator/prompts/_templates/executor-rules.md`) + las reglas del proyecto que apliquen al frente.
 - NO generar prompts mientras haya duda o decision pendiente del PO. Esperar decision siempre.
 - Cuando se identifique un patron de bug, scan GLOBAL del codebase antes de declarar fix. Parches puntuales fallan, scans completos cierran.
 - Reproduccion + identificacion + fix > hipotesis + parche. El ejecutor DEBE reproducir el bug ANTES de proponer fix.
