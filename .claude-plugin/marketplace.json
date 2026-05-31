@@ -1,0 +1,16 @@
+{
+  "name": "ftoro-tools",
+  "description": "Tooling de Fabian Toro para Claude Code: metodo orquestador-ejecutor y memoria viva por archivos.",
+  "owner": {
+    "name": "Fabian Toro",
+    "email": "ftororod@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "orchestrator-kit",
+      "source": "./plugins/orchestrator-kit",
+      "description": "Scaffold de memoria viva por archivos + metodo orquestador-ejecutor en cualquier proyecto.",
+      "keywords": ["memory", "orchestrator", "scaffolding", "living-memory", "project-state"]
+    }
+  ]
+}
