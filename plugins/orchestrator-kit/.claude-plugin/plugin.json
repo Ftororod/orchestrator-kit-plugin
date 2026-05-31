@@ -1,7 +1,7 @@
 {
   "name": "orchestrator-kit",
   "displayName": "Orchestrator Kit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Instala memoria viva por archivos (.claude/memory/ + MEMORY.md) y el scaffolding del metodo orquestador-ejecutor (state files, rituales de sesion en CLAUDE.md, napkin, flujo prompts/inbox) en el proyecto actual, para que el conocimiento viva en archivos versionados y no en la memoria del modelo.",
   "author": {
     "name": "Fabian Toro",

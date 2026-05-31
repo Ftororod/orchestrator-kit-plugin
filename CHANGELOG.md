@@ -2,6 +2,12 @@
 
 Formato basado en Keep a Changelog. El plugin sigue semver.
 
+## [1.2.1] - 2026-05-31
+
+### Fixed
+- Limpieza de ocurrencias residuales de "sprint" -> "frente" en `CLAUDE.md`,
+  README de prompts y `ideas-huerfanas.md` (completa la unificacion de v1.2.0).
+
 ## [1.2.0] - 2026-05-31
 
 ### Added
