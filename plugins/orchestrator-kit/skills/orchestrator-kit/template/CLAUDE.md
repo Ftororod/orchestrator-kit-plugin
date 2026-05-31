@@ -58,12 +58,17 @@ Detalle completo del subsistema en `MEMORY-SYSTEM.md`.
 
 ## Al arrancar cada sesion (obligatorio, en orden, antes de cualquier otra cosa)
 
+Nota: el hook SessionStart del plugin ya inyecto al contexto el contenido de
+`MEMORY.md`, `napkin.md` y `current-state.md`, mas el listado de inbox/prompts.
+Usalo, no lo re-leas innecesariamente; los pasos siguientes siguen aplicando
+para abrir el detalle relevante y reportar al PO.
+
 1. Leer `.claude/memory/MEMORY.md` y abrir las memorias relevantes a la tarea.
 2. Leer `.claude/napkin.md` y reportar contenido al PO.
 3. Leer `orchestrator/state/current-state.md` y reportar resumen al PO.
 4. Listar `orchestrator/inbox/*/` por respuestas nuevas no procesadas.
 5. Listar `orchestrator/prompts/active/*/` por prompts en flight.
-6. Reportar al PO: "Estado actual: X sprints abiertos, Y respuestas en inbox, Z decisiones pendientes. Por donde?"
+6. Reportar al PO: "Estado actual: X frentes abiertos, Y respuestas en inbox, Z decisiones pendientes. Por donde?"
 
 Si esto no se hizo, terminar la sesion sin continuar.
 
@@ -109,7 +114,7 @@ Antes de cerrar sesion, verificar que cada dato relevante esta en su archivo.
 
 ## Emision de prompts a ejecutores (formato obligatorio)
 
-Path: `orchestrator/prompts/active/<code>/<YYYY-MM-DD>_<sprint-slug>.md`
+Path: `orchestrator/prompts/active/<code>/<YYYY-MM-DD>_<frente-slug>.md`
 
 Estructura: ver `orchestrator/prompts/_templates/prompt-template.md`. Cada prompt
 es autosuficiente, inyecta inline las reglas del ejecutor y no asume

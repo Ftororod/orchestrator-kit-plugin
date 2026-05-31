@@ -9,6 +9,16 @@ Bundles a battle-tested system so any project keeps its knowledge in versioned
 files that the model reads on start and maintains on close, instead of relying on
 the model's memory. The full template ships inside this skill at `template/`.
 
+## Enforcement (automatic, plugin-level)
+
+The plugin ships a **SessionStart hook** (`hooks/session-start.sh`) that runs on
+every session and injects `MEMORY.md`, `napkin.md`, `current-state.md` and an
+inbox/active-prompts listing into the model's context. It makes the startup
+read reliable instead of dependent on the model remembering. It no-ops silently
+in projects where the kit was never scaffolded. You do NOT install or configure
+this — it is active whenever the plugin is enabled. The startup ritual in
+`CLAUDE.md` still applies (open relevant detail memories, report to the PO).
+
 ## What this skill installs
 
 Two layers, install one or both:
@@ -154,8 +164,9 @@ working tree — commit the kit in isolation and leave the user's other work alo
   in `CLAUDE.md` ends in `commit + push`; in a public repo that publishes
   decisions, pain-points and notes. Default to Local-only mode (Step 2/5) unless
   the user confirms a private repo. Never write real secrets into memory either.
-- The rituals in `CLAUDE.md` are what make the model USE the files. Without the
-  start-of-session read and end-of-session write, the files exist but go stale.
+- The SessionStart hook injects state at startup, but the rituals in `CLAUDE.md`
+  are what make the model USE and MAINTAIN the files. Without the end-of-session
+  write-back, the injected state goes stale.
 - One fact per memory file. Update existing files, do not duplicate. Delete false
   memories. Do not store what the repo already records. Absolute dates only.
 - Executors do NOT reliably inherit the orchestrator's CLAUDE.md — inject the

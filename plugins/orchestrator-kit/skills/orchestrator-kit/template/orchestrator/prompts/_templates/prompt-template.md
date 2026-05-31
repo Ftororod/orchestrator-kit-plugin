@@ -1,10 +1,10 @@
-# <Titulo del sprint>
+# <Titulo del frente>
 
 ## REGLAS DEL EJECUTOR (cabecera obligatoria)
 <inyectar aqui el contenido completo de orchestrator/prompts/_templates/executor-rules.md>
 
 ## REGLAS DEL PROYECTO QUE APLICAN
-<inyectar solo las que apliquen a este sprint>
+<inyectar solo las que apliquen a este frente>
 
 ## CONTEXTO
 <breve, autosuficiente, no asume conversaciones previas>

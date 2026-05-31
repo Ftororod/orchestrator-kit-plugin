@@ -5,7 +5,7 @@ cerrar. Es la foto de "donde vamos" para no reconstruir contexto.
 
 Ultima actualizacion: <YYYY-MM-DD>
 
-## Sprints / frentes abiertos
+## Frentes abiertos
 
 | Frente | Code asignado | Estado | Bloqueado por |
 |---|---|---|---|

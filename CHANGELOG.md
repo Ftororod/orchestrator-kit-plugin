@@ -2,6 +2,23 @@
 
 Formato basado en Keep a Changelog. El plugin sigue semver.
 
+## [1.2.0] - 2026-05-31
+
+### Added
+- **Hook SessionStart** (`hooks/hooks.json` + `hooks/session-start.sh`): inyecta
+  `MEMORY.md`, `napkin.md`, `current-state.md` y un listado de inbox/prompts en
+  vuelo al contexto al arrancar la sesion. Convierte el ritual de arranque de
+  "instruccion que el modelo puede olvidar" a enforcement real. No-op silencioso
+  en proyectos sin el kit; siempre sale 0.
+
+### Changed
+- `listeners/start-all.sh`: idempotencia entre reinicios via marcador
+  `.<base>.dispatched` (no re-ejecuta prompts ya despachados); prompt al CLI por
+  stdin en vez de argumento (evita ARG_MAX en prompts grandes); el marcador se
+  borra si la ejecucion falla para permitir reintento.
+- Terminologia unificada a "frente" (antes mezclaba "sprint"/"frente") en
+  `CLAUDE.md`, `current-state.md` y plantillas de prompt.
+
 ## [1.1.0] - 2026-05-31
 
 ### Added

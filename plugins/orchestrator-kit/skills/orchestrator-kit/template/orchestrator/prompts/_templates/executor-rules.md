@@ -46,5 +46,5 @@ Al cierre, una seccion compacta:
 
 Omite secciones vacias.
 
-### Reglas del proyecto que aplican a este sprint
-<el orquestador inyecta aqui solo las reglas del proyecto relevantes al sprint>
+### Reglas del proyecto que aplican a este frente
+<el orquestador inyecta aqui solo las reglas del proyecto relevantes al frente>

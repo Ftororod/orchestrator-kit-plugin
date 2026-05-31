@@ -108,11 +108,27 @@ y reparte trabajo a instancias "ejecutoras". Instala:
 - `orchestrator/inbox/` — respuestas de los ejecutores.
 - `orchestrator/listeners/` — despacho automatico de prompts (opcional).
 
+## Enforcement: hook SessionStart
+
+El punto debil de cualquier sistema de memoria por archivos es que el ritual de
+arranque depende de que el modelo recuerde ejecutarlo. El plugin cierra ese
+agujero con un **hook SessionStart** (`hooks/session-start.sh`) que se ejecuta
+automaticamente al abrir cada sesion e **inyecta al contexto** el contenido de
+`MEMORY.md`, `napkin.md`, `current-state.md` y un listado de respuestas en inbox
+y prompts en vuelo. Asi el estado del proyecto esta presente desde el primer
+token, sin depender de la disciplina del modelo.
+
+El hook viene con el plugin (no se copia al proyecto) y corre en todo proyecto
+donde el plugin este habilitado, pero hace **no-op silencioso** si el kit no esta
+montado (los archivos no existen). El modelo igual debe seguir el ritual de
+arranque para abrir las memorias de detalle relevantes y reportar al PO.
+
 ## El ciclo de una sesion: arranque y cierre
 
-El valor del kit esta en los dos rituales que instala en `CLAUDE.md`. Son lo que
-obliga al modelo a usar los archivos; sin ellos, los archivos existen pero se
-quedan obsoletos.
+El valor del kit esta en los dos rituales que instala en `CLAUDE.md`. El hook
+inyecta el estado al arrancar; los rituales aseguran que el modelo lo use y que
+vuelque todo al cerrar. Sin los rituales, los archivos existen pero se quedan
+obsoletos.
 
 ### Al arrancar (obligatorio, en orden)
 
@@ -186,6 +202,9 @@ orchestrator-kit-plugin/
 │   └── orchestrator-kit/
 │       ├── .claude-plugin/
 │       │   └── plugin.json           # manifest del plugin
+│       ├── hooks/
+│       │   ├── hooks.json            # registra el hook SessionStart
+│       │   └── session-start.sh      # inyecta la memoria al arrancar
 │       └── skills/
 │           └── orchestrator-kit/
 │               ├── SKILL.md          # instrucciones del skill
