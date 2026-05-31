@@ -2,11 +2,17 @@
 
 Formato basado en Keep a Changelog. El plugin sigue semver.
 
+## [1.2.2] - 2026-05-31
+
+### Fixed
+- Limpieza COMPLETA de "sprint" -> "frente": README de prompts (active/completed),
+  inbox e `ideas-huerfanas.md`. Cierra lo que 1.2.1 dejo a medias.
+
 ## [1.2.1] - 2026-05-31
 
 ### Fixed
-- Limpieza de ocurrencias residuales de "sprint" -> "frente" en `CLAUDE.md`,
-  README de prompts y `ideas-huerfanas.md` (completa la unificacion de v1.2.0).
+- Limpieza de ocurrencias residuales de "sprint" -> "frente" en `CLAUDE.md`
+  (parcial; el resto se completo en 1.2.2).
 
 ## [1.2.0] - 2026-05-31
 
