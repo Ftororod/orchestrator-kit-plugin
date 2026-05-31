@@ -1,6 +1,6 @@
 # Ideas no priorizadas (huerfanas) — <PROYECTO>
 
-Ideas que surgieron pero no entraron a ningun sprint. No estan descartadas (eso
+Ideas que surgieron pero no entraron a ningun frente. No estan descartadas (eso
 va en `discarded.md`), solo no priorizadas. Parking lot para no perderlas.
 
 Formato:
